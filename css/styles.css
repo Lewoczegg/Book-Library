@@ -13,6 +13,7 @@ body {
     background-color: #e3e3e3;
 }
 
+/* Header */
 header {
     background-color: #ffffff;
     padding: 20px;
@@ -24,6 +25,49 @@ header > h1 {
     font-size: 3rem;
 }
 
+/* Main */
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+.book {
+    display: flex;
+    margin: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    flex-direction: column;
+    font-size: 2rem;
+    gap: 1rem;
+    border-radius: 10px;
+}
+
+.book > p {
+    font-weight: 500;
+}
+
+.book span {
+    font-weight: normal;
+}
+
+.book button {
+    font-size: 2rem;
+    border: 0;
+    border-radius: 10px;
+    padding: 10px;
+    font-weight: 500;
+}
+
+.book > .read {
+    background-color: #90db53;
+}
+
+.book > .remove {
+    background-color: #db4d4d;
+}
+
+/* Footer */
 footer {
     background-color: #ffffff;
     bottom: 0;
