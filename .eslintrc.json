@@ -13,6 +13,10 @@
     "rules": {
         "no-console": "off",
         "no-use-before-define": "off",
-        "no-param-reassign": "off"
+        "no-param-reassign": "off",
+        "no-plusplus": "off",
+        "no-continue": "off",
+        "array-callback-return": "off",
+        "consistent-return": "off"
     }
 }

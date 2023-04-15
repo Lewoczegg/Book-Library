@@ -6,6 +6,12 @@ const titleInput = document.querySelector('input[placeholder="Title"]');
 const authorInput = document.querySelector('input[placeholder="Author"]');
 const isReadInput = document.querySelector('#read');
 const bookContainer = document.querySelector('.book-container');
+const menuButton = document.querySelector('#menu-button');
+const menu = document.querySelector('.menu');
+const sortByTitleAscButton = document.getElementById('sort-titile-asc');
+const sortByTitleDescButton = document.getElementById('sort-titile-desc');
+const sortByAuthorAscButton = document.getElementById('sort-author-asc');
+const sortByAuthorDescButton = document.getElementById('sort-author-desc');
 
 let books = [];
 
@@ -15,6 +21,10 @@ function showModal() {
 
 function closeModal() {
   modal.style.display = 'none';
+}
+
+function toggleMenu() {
+  menu.classList.toggle('toggle');
 }
 
 function addBookToLibrary(event) {
@@ -91,8 +101,47 @@ function renderBooks() {
   });
 }
 
+function sortBooks(sortBy, sortOrder) {
+  books.sort((a, b) => {
+    const aVal = a[sortBy];
+    const bVal = b[sortBy];
+    if (aVal < bVal) return sortOrder === 'asc' ? -1 : 1;
+    if (aVal > bVal) return sortOrder === 'asc' ? 1 : -1;
+  });
+  renderBooks();
+}
+
 retrieveFromLocalStorage();
 
 addNewBook.addEventListener('click', showModal);
 closeModalButton.addEventListener('click', closeModal);
 bookForm.addEventListener('submit', addBookToLibrary);
+menuButton.addEventListener('click', toggleMenu);
+sortByTitleAscButton.addEventListener('click', () => {
+  sortBooks('title', 'asc');
+  sortByTitleAscButton.style.backgroundColor = '#90db53';
+  sortByTitleDescButton.style.backgroundColor = '#eeeeee';
+  sortByAuthorAscButton.style.backgroundColor = '#eeeeee';
+  sortByAuthorDescButton.style.backgroundColor = '#eeeeee';
+});
+sortByTitleDescButton.addEventListener('click', () => {
+  sortBooks('title', 'desc');
+  sortByTitleAscButton.style.backgroundColor = '#eeeeee';
+  sortByTitleDescButton.style.backgroundColor = '#90db53';
+  sortByAuthorAscButton.style.backgroundColor = '#eeeeee';
+  sortByAuthorDescButton.style.backgroundColor = '#eeeeee';
+});
+sortByAuthorAscButton.addEventListener('click', () => {
+  sortBooks('author', 'asc');
+  sortByTitleAscButton.style.backgroundColor = '#eeeeee';
+  sortByTitleDescButton.style.backgroundColor = '#eeeeee';
+  sortByAuthorAscButton.style.backgroundColor = '#90db53';
+  sortByAuthorDescButton.style.backgroundColor = '#eeeeee';
+});
+sortByAuthorDescButton.addEventListener('click', () => {
+  sortBooks('author', 'desc');
+  sortByTitleAscButton.style.backgroundColor = '#eeeeee';
+  sortByTitleDescButton.style.backgroundColor = '#eeeeee';
+  sortByAuthorAscButton.style.backgroundColor = '#eeeeee';
+  sortByAuthorDescButton.style.backgroundColor = '#90db53';
+});
