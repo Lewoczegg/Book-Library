@@ -50,8 +50,29 @@ function renderBooks() {
     bookElement.innerHTML = `
       <p>Title: <span class="title">${book.title}</span></p>
       <p>Author: <span class="author">${book.author}</span></p>
-      <button class="read">${book.isRead ? 'Read' : 'Unread'}</button>
     `;
+
+    const readButton = document.createElement('button');
+    readButton.classList.add('read');
+    if (book.isRead) {
+      readButton.textContent = 'Read';
+    } else {
+      readButton.textContent = 'Unread';
+      readButton.style.backgroundColor = '#db4d4d';
+    }
+    readButton.addEventListener('click', () => {
+      if (book.isRead) {
+        book.isRead = false;
+        readButton.textContent = 'Unread';
+        readButton.style.backgroundColor = '#db4d4d';
+      } else {
+        book.isRead = true;
+        readButton.textContent = 'Read';
+        readButton.style.backgroundColor = '#90db53';
+      }
+      localStorage.setItem('books', JSON.stringify(books));
+    });
+
     const removeButton = document.createElement('button');
     removeButton.textContent = 'Remove';
     removeButton.classList.add('remove');
@@ -62,7 +83,10 @@ function renderBooks() {
       localStorage.setItem('books', JSON.stringify(books));
       parent.remove();
     });
+
+    bookElement.append(readButton);
     bookElement.appendChild(removeButton);
+
     bookContainer.appendChild(bookElement);
   });
 }
