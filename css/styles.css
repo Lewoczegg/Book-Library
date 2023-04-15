@@ -67,6 +67,83 @@ main {
     background-color: #db4d4d;
 }
 
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-inner {
+    overflow: hidden;
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 10px;
+}
+
+.modal-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    font-size: 2rem;
+    background-color: #eeeeee;
+}
+
+.modal-top .modal-close {
+    border: 0;
+    margin-left: auto;
+}
+
+.modal-top .modal-close > img {
+    height: 20px;
+}
+
+.modal-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 2rem;
+}
+
+.modal-content > input {
+    font-size: 2rem;
+    padding: 10px;
+    border-radius: 10px;
+    border: 0;
+    background-color: #eeeeee;
+}
+
+.modal-content .is-read {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    gap: 15px;
+}
+
+.modal-content #read {
+    width: 30px;
+    height: 30px;
+}
+
+.modal-content button {
+    border: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    background-color: #90db53;
+    padding: 10px 20px;
+    border-radius: 15px;
+}
+
 /* Footer */
 footer {
     background-color: #ffffff;

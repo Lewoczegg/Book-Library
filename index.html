@@ -18,8 +18,27 @@
             <button class="read">Read</button>
             <button class="remove">Remove</button>
         </div>
+    </main>
     <footer>
         <button id="add-book">+ Add book</button>
     </footer>
+    <div class="modal">
+        <div class="modal-inner">
+            <div class="modal-top">
+                <h2>Add new book</h2>
+                <button type="button" class="modal-close"><img src="img/close.png" alt="Closing icon"></button>
+            </div>
+            <form class="modal-content">
+                <input type="text" placeholder="Title">
+                <input type="text" placeholder="Author">
+                <div class="is-read">
+                    <label for="read">Have you read it?</label>
+                    <input type="checkbox" name="read" id="read">
+                </div>
+                <button type="button">Add</button>
+            </form>
+        </div>
+    </div>
+    <script src="js/index.js"></script>
 </body>
 </html>
