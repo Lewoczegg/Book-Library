@@ -44,16 +44,25 @@ function retrieveFromLocalStorage() {
 
 function renderBooks() {
   bookContainer.innerHTML = '';
-  books.forEach((book, index) => {
+  books.forEach((book) => {
     const bookElement = document.createElement('div');
     bookElement.classList.add('book');
-    bookElement.dataset.index = index;
     bookElement.innerHTML = `
       <p>Title: <span class="title">${book.title}</span></p>
       <p>Author: <span class="author">${book.author}</span></p>
       <button class="read">${book.isRead ? 'Read' : 'Unread'}</button>
-      <button class="remove">Remove</button>
     `;
+    const removeButton = document.createElement('button');
+    removeButton.textContent = 'Remove';
+    removeButton.classList.add('remove');
+    removeButton.addEventListener('click', () => {
+      const parent = removeButton.parentElement;
+      const bookIndex = Array.from(parent.parentNode.children).indexOf(parent);
+      books.splice(bookIndex, 1);
+      localStorage.setItem('books', JSON.stringify(books));
+      parent.remove();
+    });
+    bookElement.appendChild(removeButton);
     bookContainer.appendChild(bookElement);
   });
 }
