@@ -245,3 +245,19 @@ footer > #add-book {
 footer > #add-book:hover {
     background-color: #70ad3d;
 }
+
+@media screen and (min-width: 800px){
+    .book-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    }
+
+    .menu {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .menu.toggle {
+        height: 70px;
+    }
+}
