@@ -21,16 +21,43 @@ header {
     position: sticky;
     top: 0;
     display: flex;
+    gap: 10px;
 }
 
 header > h1 {
     font-size: 3rem;
+}
+
+.search {
+    display: flex;
+    flex-direction: row;
     flex: 1;
+    position: relative;
+}
+
+.search > #search-bar {
+    width: 150px;
+    padding: 0 10px;
+    padding-right: 35px;
+    flex: 1;
+    font-size: 1.8rem;
+    border: 0;
+    background-color: #e3e3e3;
+    border-radius: 20px;
+}
+
+.search img {
+    height: 20px;
+    border: 0;
+    position: absolute;
+    right: 9px;
+    top: 7px;
 }
 
 header > button {
     background-color: #ffffff;
     border: 0;
+    cursor: pointer;
 }
 
 header img {
@@ -63,6 +90,8 @@ header img {
     border-radius: 10px;
     padding: 10px;
     font-weight: 500;
+    cursor: pointer;
+    background-color: #e3e3e3;
 }
 
 .menu.toggle > button {
@@ -101,6 +130,7 @@ main {
     border-radius: 10px;
     padding: 10px;
     font-weight: 500;
+    cursor: pointer;
 }
 
 .book > .read {

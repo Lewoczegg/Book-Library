@@ -12,6 +12,7 @@ const sortByTitleAscButton = document.getElementById('sort-titile-asc');
 const sortByTitleDescButton = document.getElementById('sort-titile-desc');
 const sortByAuthorAscButton = document.getElementById('sort-author-asc');
 const sortByAuthorDescButton = document.getElementById('sort-author-desc');
+const searchBar = document.querySelector('#search-bar');
 
 let books = [];
 
@@ -52,9 +53,10 @@ function retrieveFromLocalStorage() {
   }
 }
 
-function renderBooks() {
+function renderBooks(booksFiltered = []) {
   bookContainer.innerHTML = '';
-  books.forEach((book) => {
+  const booksToRender = booksFiltered.length > 0 ? booksFiltered : books;
+  booksToRender.forEach((book) => {
     const bookElement = document.createElement('div');
     bookElement.classList.add('book');
     bookElement.innerHTML = `
@@ -111,37 +113,48 @@ function sortBooks(sortBy, sortOrder) {
   renderBooks();
 }
 
-retrieveFromLocalStorage();
+sortByTitleAscButton.addEventListener('click', () => {
+  sortBooks('title', 'asc');
+  sortByTitleAscButton.style.backgroundColor = '#90db53';
+  sortByTitleDescButton.style.backgroundColor = '#e3e3e3';
+  sortByAuthorAscButton.style.backgroundColor = '#e3e3e3';
+  sortByAuthorDescButton.style.backgroundColor = '#e3e3e3';
+});
+
+sortByTitleDescButton.addEventListener('click', () => {
+  sortBooks('title', 'desc');
+  sortByTitleAscButton.style.backgroundColor = '#e3e3e3';
+  sortByTitleDescButton.style.backgroundColor = '#90db53';
+  sortByAuthorAscButton.style.backgroundColor = '#e3e3e3';
+  sortByAuthorDescButton.style.backgroundColor = '#e3e3e3';
+});
+
+sortByAuthorAscButton.addEventListener('click', () => {
+  sortBooks('author', 'asc');
+  sortByTitleAscButton.style.backgroundColor = '#e3e3e3';
+  sortByTitleDescButton.style.backgroundColor = '#e3e3e3';
+  sortByAuthorAscButton.style.backgroundColor = '#90db53';
+  sortByAuthorDescButton.style.backgroundColor = '#e3e3e3';
+});
+
+sortByAuthorDescButton.addEventListener('click', () => {
+  sortBooks('author', 'desc');
+  sortByTitleAscButton.style.backgroundColor = '#e3e3e3';
+  sortByTitleDescButton.style.backgroundColor = '#e3e3e3';
+  sortByAuthorAscButton.style.backgroundColor = '#e3e3e3';
+  sortByAuthorDescButton.style.backgroundColor = '#90db53';
+});
+
+searchBar.addEventListener('input', () => {
+  const searchTerms = searchBar.value.toLowerCase();
+  const filteredBooks = books.filter((book) => book.title.toLowerCase().includes(searchTerms)
+    || book.author.toLowerCase().includes(searchTerms));
+  renderBooks(filteredBooks);
+});
 
 addNewBook.addEventListener('click', showModal);
 closeModalButton.addEventListener('click', closeModal);
 bookForm.addEventListener('submit', addBookToLibrary);
 menuButton.addEventListener('click', toggleMenu);
-sortByTitleAscButton.addEventListener('click', () => {
-  sortBooks('title', 'asc');
-  sortByTitleAscButton.style.backgroundColor = '#90db53';
-  sortByTitleDescButton.style.backgroundColor = '#eeeeee';
-  sortByAuthorAscButton.style.backgroundColor = '#eeeeee';
-  sortByAuthorDescButton.style.backgroundColor = '#eeeeee';
-});
-sortByTitleDescButton.addEventListener('click', () => {
-  sortBooks('title', 'desc');
-  sortByTitleAscButton.style.backgroundColor = '#eeeeee';
-  sortByTitleDescButton.style.backgroundColor = '#90db53';
-  sortByAuthorAscButton.style.backgroundColor = '#eeeeee';
-  sortByAuthorDescButton.style.backgroundColor = '#eeeeee';
-});
-sortByAuthorAscButton.addEventListener('click', () => {
-  sortBooks('author', 'asc');
-  sortByTitleAscButton.style.backgroundColor = '#eeeeee';
-  sortByTitleDescButton.style.backgroundColor = '#eeeeee';
-  sortByAuthorAscButton.style.backgroundColor = '#90db53';
-  sortByAuthorDescButton.style.backgroundColor = '#eeeeee';
-});
-sortByAuthorDescButton.addEventListener('click', () => {
-  sortBooks('author', 'desc');
-  sortByTitleAscButton.style.backgroundColor = '#eeeeee';
-  sortByTitleDescButton.style.backgroundColor = '#eeeeee';
-  sortByAuthorAscButton.style.backgroundColor = '#eeeeee';
-  sortByAuthorDescButton.style.backgroundColor = '#90db53';
-});
+
+retrieveFromLocalStorage();
